@@ -1,7 +1,7 @@
 package oop;
 
 public class Inheritance {
-
+//Check
     class Animal {
         public void eat () {
             System.out.println("This Animal eats food.");
