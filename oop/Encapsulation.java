@@ -11,8 +11,7 @@ public class Encapsulation {
                 this.balance = balance;
             }
             else {
-                System.out.println("You Cannot have negative Balance");
-                this.balance = 0;
+                throw new IllegalArgumentException("Balance cannot be negative");
             }
 
         }
@@ -26,10 +25,10 @@ public class Encapsulation {
         public void deposit(double amount) {
             if (amount > 0 ) {
                 balance += amount;
-                System.out.println("Deposited: " + amount + ". New Balance is: " + balance );
+                System.out.println("Deposited: " + amount + ". New balance is: " + balance);
             }
             else {
-                System.out.println("You cannot deposit negative value");
+                throw new IllegalArgumentException("You cannot deposit Negative balance");
             }
 
         }
@@ -38,22 +37,52 @@ public class Encapsulation {
         public void withdraw(double amount) {
             if (amount > 0 && amount <= balance) {
                 balance -= amount;
-                System.out.println ("You have withdrawn amount" + amount + "Your new balance is " + balance);
+                System.out.println("You have withdrawn " + amount + ". Your new balance is: " + balance);
+        }
+
+            else if ( amount > balance) {
+                throw new IllegalArgumentException("Insufficient funds. Cannot Withdraw " + amount);
             }
             else {
-                System.out.println("You cannot withdraw negative value nor can you withdraw more money than you have.");
+                throw new IllegalArgumentException("The withdraw amount must be positive");
+
             }
-        }
+
+            }
 
     }
 
     public static void main(String[] args) {
-        BankAccount account = new BankAccount(200.00);
-        System.out.println(account.getBalance());
-        account.deposit(20.00);
-        account.withdraw(70.00);
-        account.withdraw(2000); // Withdrawal denied
+        // Test valid operations
+        try {
+            BankAccount account = new BankAccount(200.00);
+            System.out.println("Initial balance: " + account.getBalance());
+            account.deposit(20.00);
+            account.withdraw(70.00);
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
 
+        // Test invalid operations
+        try {
+            BankAccount account = new BankAccount(200.00);
+            account.withdraw(2999.00); // Insufficient funds
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+
+        try {
+            BankAccount account_two = new BankAccount(-50.00); // Negative balance
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
+
+        try {
+            BankAccount account = new BankAccount(100.00);
+            account.deposit(-50); // Negative deposit
+        } catch (IllegalArgumentException e) {
+            System.err.println("Error: " + e.getMessage());
+        }
     }
 
 
