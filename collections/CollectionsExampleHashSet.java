@@ -9,6 +9,7 @@ public class CollectionsExampleHashSet {
         cities.add("Chicago");
         cities.add("Seattle");
         cities.add("Washington");
+        cities.remove("New York");
 
         System.out.println(cities.size());
         System.out.println(cities.contains("Chicago"));

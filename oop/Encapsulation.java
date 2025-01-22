@@ -1,5 +1,7 @@
 package oop;
+import exceptions.InsufficientFundsException;
 
+//Adding session for Custom Exception for Java Core Study Unit 1. Please see the exceptions package.
 public class Encapsulation {
     static class BankAccount {
         //Setting a private variable for encapsulation review of having data protection.
@@ -34,14 +36,14 @@ public class Encapsulation {
         }
 
         //Setter to set the withdraw from private balance, and control what can be withdrawn.
-        public void withdraw(double amount) {
+        public void withdraw(double amount) throws InsufficientFundsException{
             if (amount > 0 && amount <= balance) {
                 balance -= amount;
                 System.out.println("You have withdrawn " + amount + ". Your new balance is: " + balance);
         }
 
             else if ( amount > balance) {
-                throw new IllegalArgumentException("Insufficient funds. Cannot Withdraw " + amount);
+                throw new InsufficientFundsException("Insufficient funds. Cannot Withdraw " + amount);
             }
             else {
                 throw new IllegalArgumentException("The withdraw amount must be positive");
@@ -61,6 +63,8 @@ public class Encapsulation {
             account.withdraw(70.00);
         } catch (IllegalArgumentException e) {
             System.err.println("Error: " + e.getMessage());
+        } catch (InsufficientFundsException e) {
+            System.err.println("Custom Error: " + e.getMessage());
         }
 
         // Test invalid operations
@@ -69,6 +73,8 @@ public class Encapsulation {
             account.withdraw(2999.00); // Insufficient funds
         } catch (IllegalArgumentException e) {
             System.err.println("Error: " + e.getMessage());
+        }catch (InsufficientFundsException e) {
+            System.err.println("Custom Error: " + e.getMessage());
         }
 
         try {
