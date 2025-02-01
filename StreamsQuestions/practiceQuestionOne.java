@@ -14,7 +14,7 @@ public class practiceQuestionOne {
         System.out.println(numbers.stream().filter(number -> String.valueOf(number).startsWith("1")).collect(Collectors.toList()));
 
         //Stream allow functional-style operations on collections (Process data without loops)
-        //Filter let us remove unwanted data based on condtion.
+        //Filter let us remove unwanted data based on condition.
         //Using String.valueOf(num) converts integer to String.
         //.startsWith("1") hels us match numbers that start with "1"
     }
