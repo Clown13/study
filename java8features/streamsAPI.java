@@ -3,6 +3,7 @@ package java8features;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 //Streams API - A Stream in java is used to process collections of data in functional style. It allows operations like filtering, mapping, and reducing without modifying original collection
@@ -66,6 +67,8 @@ public class streamsAPI {
         int findMax = numberSetThree.stream().reduce(0, (a,b) -> a>b?a:b);
         System.out.println("Find max: " + findMax);
 
+        Optional<Integer> findMin = numberSetThree.stream().reduce((a, b) -> a<b?a:b);
+        System.out.println("Find min: " + findMin.get());
 
 
     }
